@@ -1,6 +1,9 @@
 package io.github.haykam821.elytron.game.map;
 
+import java.util.Set;
+
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
@@ -33,6 +36,11 @@ public class ElytronMap {
 
 	public Vec3d getWaitingSpawnPos() {
 		return this.waitingSpawnPos;
+	}
+
+	public void teleportToWaitingSpawn(ServerPlayerEntity player) {
+		Vec3d pos = this.getWaitingSpawnPos();
+		player.teleport(player.getServerWorld(), pos.getX(), pos.getY(), pos.getZ(), Set.of(), 0, 0, true);
 	}
 
 	public ChunkGenerator createGenerator(MinecraftServer server) {

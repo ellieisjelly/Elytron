@@ -135,6 +135,11 @@ public class ElytronActivePhase {
 		}
 
 		this.singleplayer = this.players.size() == 1;
+
+		for (ServerPlayerEntity player : this.gameSpace.getPlayers().spectators()) {
+			this.map.teleportToWaitingSpawn(player);
+			this.setSpectator(player);
+		}
 	}
 
 	private void addTrailBlock(Block block, BlockPos pos, int ticks, Map<Block, Long2IntMap> trailPositions) {
