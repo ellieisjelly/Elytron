@@ -4,7 +4,6 @@ import java.util.Set;
 
 import io.github.haykam821.elytron.game.ElytronConfig;
 import io.github.haykam821.elytron.game.map.ElytronMap;
-import io.github.haykam821.elytron.game.map.ElytronMapBuilder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
@@ -38,8 +37,7 @@ public class ElytronWaitingPhase {
 	}
 
 	public static GameOpenProcedure open(GameOpenContext<ElytronConfig> context) {
-		ElytronMapBuilder mapBuilder = new ElytronMapBuilder(context.config());
-		ElytronMap map = mapBuilder.create(context.server().overworld().getRandom());
+		ElytronMap map = new ElytronMap(context.config().getMapConfig());
 
 		RuntimeLevelConfig levelConfig = new RuntimeLevelConfig()
 			.setGenerator(map.createGenerator(context.server()));

@@ -13,20 +13,20 @@ public class ElytronMapConfig {
 			Codec.INT.fieldOf("x").forGetter(ElytronMapConfig::getX),
 			Codec.INT.fieldOf("y").forGetter(ElytronMapConfig::getY),
 			Codec.INT.fieldOf("z").forGetter(ElytronMapConfig::getZ),
-			BlockState.CODEC.optionalFieldOf("floor_provider", Blocks.SPRUCE_PLANKS.defaultBlockState()).forGetter(ElytronMapConfig::getFloorProvider),
-			BlockState.CODEC.optionalFieldOf("wall_provider", Blocks.STRIPPED_DARK_OAK_LOG.defaultBlockState()).forGetter(ElytronMapConfig::getWallProvider),
-			BlockState.CODEC.optionalFieldOf("ceiling_provider", Blocks.WHITE_STAINED_GLASS.defaultBlockState()).forGetter(ElytronMapConfig::getCeilingProvider)
+			BlockStateProvider.CODEC.optionalFieldOf("floor_provider", BlockStateProvider.simple(Blocks.SPRUCE_PLANKS)).forGetter(ElytronMapConfig::getFloorProvider),
+			BlockStateProvider.CODEC.optionalFieldOf("wall_provider", BlockStateProvider.simple(Blocks.STRIPPED_DARK_OAK_LOG)).forGetter(ElytronMapConfig::getWallProvider),
+			BlockStateProvider.CODEC.optionalFieldOf("ceiling_provider", BlockStateProvider.simple(Blocks.WHITE_STAINED_GLASS)).forGetter(ElytronMapConfig::getCeilingProvider)
 		).apply(instance, ElytronMapConfig::new);
 	});
 
 	private final int x;
 	private final int y;
 	private final int z;
-	private final BlockState floorProvider;
-	private final BlockState wallProvider;
-	private final BlockState ceilingProvider;
+	private final BlockStateProvider floorProvider;
+	private final BlockStateProvider wallProvider;
+	private final BlockStateProvider ceilingProvider;
 
-	public ElytronMapConfig(int x, int y, int z, BlockState floorProvider, BlockState wallProvider, BlockState ceilingProvider) {
+	public ElytronMapConfig(int x, int y, int z, BlockStateProvider floorProvider, BlockStateProvider wallProvider, BlockStateProvider ceilingProvider) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -47,15 +47,15 @@ public class ElytronMapConfig {
 		return this.z;
 	}
 
-	public BlockState getFloorProvider() {
+	public BlockStateProvider getFloorProvider() {
 		return this.floorProvider;
 	}
 
-	public BlockState getWallProvider() {
+	public BlockStateProvider getWallProvider() {
 		return this.wallProvider;
 	}
 
-	public BlockState getCeilingProvider() {
+	public BlockStateProvider getCeilingProvider() {
 		return this.ceilingProvider;
 	}
 }
